@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://d05p2ac64yb3w"]
+
+[ext_resource type="Script" path="res://scripts/void_1.gd" id="1_3f7cy"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_owbe4"]
+
+[node name="void" type="Node2D"]
+script = ExtResource("1_3f7cy")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -1)
+shape = SubResource("WorldBoundaryShape2D_owbe4")
+debug_color = Color(0.980392, 0, 0, 1)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

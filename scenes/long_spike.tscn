@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://ck1dnx30ept3m"]
+
+[ext_resource type="Script" path="res://scripts/long_spike.gd" id="1_ys2k4"]
+[ext_resource type="Texture2D" uid="uid://c2ewhxsp5fcax" path="res://assets/tiles/long_spike.png" id="2_jp1ig"]
+[ext_resource type="Texture2D" uid="uid://c4v7alt1c2p4a" path="res://assets/tiles/long_spike_hitted.png" id="3_kcpgc"]
+[ext_resource type="Gradient" uid="uid://bql5pagnb343k" path="res://Colors,guis,others/new_gradient.tres" id="4_fulrf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6rk6e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jp1ig")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_kcpgc")
+}],
+"loop": false,
+"name": &"hitted",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_181tt"]
+radius = 0.897117
+
+[node name="long_spike" type="Node2D"]
+script = ExtResource("1_ys2k4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, -2)
+sprite_frames = SubResource("SpriteFrames_6rk6e")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(1.44133, 1.13691)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(3.42405, 14.281)
+shape = SubResource("CircleShape2D_181tt")
+debug_color = Color(0.980392, 0, 0, 0.419608)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, -6)
+emitting = false
+amount = 9
+lifetime = 1.3
+one_shot = true
+speed_scale = 1.25
+explosiveness = 1.0
+randomness = 0.5
+lifetime_randomness = 0.37
+emission_shape = 1
+emission_sphere_radius = 5.0
+direction = Vector2(0, -200)
+spread = 12.65
+gravity = Vector2(0, 90)
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+scale_amount_min = 0.75
+scale_amount_max = 2.45
+color_ramp = ExtResource("4_fulrf")
+
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
+[connection signal="finished" from="CPUParticles2D" to="." method="_on_cpu_particles_2d_finished"]

@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqq8ot2uagaum"]
+
+[ext_resource type="Script" path="res://scripts/shard.gd" id="1_meih7"]
+[ext_resource type="Texture2D" uid="uid://bwtp8ne6hjdh3" path="res://assets/tiles/shard.png" id="1_vdyde"]
+[ext_resource type="AudioStream" uid="uid://dgcigtxt4mxtb" path="res://assets/sounds/shard_sound.mp3" id="3_ku20x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0qmt8"]
+size = Vector2(25.8895, 21.741)
+
+[node name="shard" type="Node2D"]
+script = ExtResource("1_meih7")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 0.884838)
+rotation = -3.14159
+scale = Vector2(0.424883, -0.725343)
+shape = SubResource("RectangleShape2D_0qmt8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("1_vdyde")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Area2D"]
+stream = ExtResource("3_ku20x")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

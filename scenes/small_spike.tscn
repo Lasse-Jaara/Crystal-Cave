@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8cgmubbqget0"]
+
+[ext_resource type="Script" path="res://scripts/small_spike.gd" id="1_cjc00"]
+[ext_resource type="Texture2D" uid="uid://dq2fob6n5b1dd" path="res://assets/tiles/spike.png" id="1_e6w8t"]
+[ext_resource type="Texture2D" uid="uid://kkke28qyy1eb" path="res://assets/tiles/spike_hitted.png" id="3_171un"]
+[ext_resource type="Gradient" uid="uid://bql5pagnb343k" path="res://Colors,guis,others/new_gradient.tres" id="4_lq5r3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6rk6e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_e6w8t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_171un")
+}],
+"loop": true,
+"name": &"hitted",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_181tt"]
+radius = 0.897117
+
+[node name="small_spike" type="Node2D"]
+script = ExtResource("1_cjc00")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -3)
+sprite_frames = SubResource("SpriteFrames_6rk6e")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(3.42405, 13.7521)
+shape = SubResource("CircleShape2D_181tt")
+debug_color = Color(0.980392, 0, 0, 0.419608)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Area2D"]
+position = Vector2(0, -3)
+emitting = false
+amount = 5
+lifetime = 1.3
+one_shot = true
+speed_scale = 1.25
+explosiveness = 1.0
+randomness = 0.5
+lifetime_randomness = 0.37
+emission_shape = 1
+emission_sphere_radius = 5.0
+direction = Vector2(0, -200)
+spread = 12.65
+gravity = Vector2(0, 90)
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+scale_amount_min = 0.75
+scale_amount_max = 2.45
+color_ramp = ExtResource("4_lq5r3")
+
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
+[connection signal="finished" from="Area2D/CPUParticles2D" to="." method="_on_cpu_particles_2d_finished"]

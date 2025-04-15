@@ -1,0 +1,206 @@
+[gd_scene load_steps=13 format=3 uid="uid://dd8ofntjc8fd"]
+
+[ext_resource type="Script" path="res://scripts/menus/score.gd" id="1_65kkn"]
+[ext_resource type="Theme" uid="uid://cmox6att1o3fd" path="res://scenes/ui/menu_theme.tres" id="1_pcrm3"]
+[ext_resource type="Texture2D" uid="uid://bvjn1mq84ceq7" path="res://assets/tiles/crystal2.png" id="2_gabro"]
+[ext_resource type="AudioStream" uid="uid://ci7jvibev6t5u" path="res://assets/sounds/click.wav" id="3_rm8bv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qab0g"]
+atlas = ExtResource("2_gabro")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymkft"]
+atlas = ExtResource("2_gabro")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_arpyx"]
+atlas = ExtResource("2_gabro")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rern"]
+atlas = ExtResource("2_gabro")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fsddl"]
+atlas = ExtResource("2_gabro")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8ll0"]
+atlas = ExtResource("2_gabro")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q536g"]
+atlas = ExtResource("2_gabro")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2qhmg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qab0g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymkft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_arpyx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rern")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fsddl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8ll0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q536g")
+}],
+"loop": true,
+"name": &"elo",
+"speed": 8.0
+}]
+
+[node name="Score" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_65kkn")
+
+[node name="MarginContainer3" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer3"]
+layout_mode = 2
+color = Color(0.160784, 0.117647, 0.117647, 0.980392)
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 350
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 350
+theme_override_constants/margin_bottom = 124
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer2"]
+layout_mode = 2
+color = Color(0.129412, 0.0901961, 0.0901961, 1)
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 450
+theme_override_constants/margin_right = 450
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_pcrm3")
+theme_override_constants/margin_left = -60
+theme_override_constants/margin_bottom = 480
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/MarginContainer2/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="MarginContainer2/MarginContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 64
+text = "0 x"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MarginContainer2/MarginContainer2/MarginContainer/VBoxContainer/Label"]
+position = Vector2(112, 31)
+scale = Vector2(4.5, 4.5)
+sprite_frames = SubResource("SpriteFrames_2qhmg")
+animation = &"elo"
+autoplay = "elo"
+frame_progress = 0.0611145
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer2/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("1_pcrm3")
+theme_override_constants/margin_left = -60
+theme_override_constants/margin_bottom = 480
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/MarginContainer2/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="time" type="Label" parent="MarginContainer2/MarginContainer2/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 64
+text = "time s"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_pcrm3")
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="label_v_box" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/label_v_box"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 85
+text = "--- Level Complete! ---"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="buttons_v_box" type="VBoxContainer" parent="MarginContainer/label_v_box"]
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="again" type="Button" parent="MarginContainer/label_v_box/buttons_v_box"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../Exit")
+focus_neighbor_bottom = NodePath("../Exit")
+focus_next = NodePath("../Exit")
+focus_previous = NodePath("../Exit")
+theme_override_font_sizes/font_size = 72
+text = "Try again"
+
+[node name="Exit" type="Button" parent="MarginContainer/label_v_box/buttons_v_box"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../again")
+focus_neighbor_bottom = NodePath("../again")
+focus_next = NodePath("../again")
+focus_previous = NodePath("../again")
+theme_override_font_sizes/font_size = 64
+text = "Exit the level"
+
+[node name="click_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_rm8bv")
+
+[connection signal="pressed" from="MarginContainer/label_v_box/buttons_v_box/again" to="." method="when_pressed_button_again"]
+[connection signal="pressed" from="MarginContainer/label_v_box/buttons_v_box/Exit" to="." method="when_pressed_exit_button"]

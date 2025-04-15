@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://2crwtdxr4any"]
+
+[ext_resource type="Script" path="res://scripts/portal.gd" id="1_y12e0"]
+[ext_resource type="AudioStream" uid="uid://muefainv7mci" path="res://assets/sounds/pickup_crystal.wav" id="2_6csot"]
+[ext_resource type="Gradient" uid="uid://87s8pdfdixki" path="res://Colors,guis,others/blue.tres" id="3_ox74c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3j4ou"]
+size = Vector2(10.8108, 14.8438)
+
+[node name="portal" type="Node2D"]
+script = ExtResource("1_y12e0")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1.49012e-07, 0)
+scale = Vector2(2.96, 2.56)
+shape = SubResource("RectangleShape2D_3j4ou")
+debug_color = Color(0.853882, 0.0843861, 0.863258, 0.42)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_6csot")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, 18)
+amount = 55
+lifetime = 2.0
+emission_shape = 3
+emission_rect_extents = Vector2(17, 0)
+direction = Vector2(1, -18)
+spread = 5.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+color_ramp = ExtResource("3_ox74c")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
+[connection signal="timeout" from="Timer" to="." method="when_timer_runs_ot_of_TIME"]

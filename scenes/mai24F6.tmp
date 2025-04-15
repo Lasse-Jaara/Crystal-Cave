@@ -1,0 +1,33 @@
+[gd_scene load_steps=8 format=3 uid="uid://blw4040tbah"]
+
+[ext_resource type="PackedScene" uid="uid://2rlmadtur7k7" path="res://scenes/player.tscn" id="1_g6b56"]
+[ext_resource type="PackedScene" uid="uid://bvjcqws43y0cq" path="res://scenes/tilemap.tscn" id="2_pfhq2"]
+[ext_resource type="PackedScene" uid="uid://d05p2ac64yb3w" path="res://scenes/void.tscn" id="3_k6gbe"]
+[ext_resource type="PackedScene" uid="uid://bqq8ot2uagaum" path="res://scenes/shard.tscn" id="4_euupc"]
+[ext_resource type="PackedScene" uid="uid://c8cgmubbqget0" path="res://scenes/small_spike.tscn" id="5_gskgp"]
+[ext_resource type="PackedScene" uid="uid://b1mykfnar5qhx" path="res://scenes/background.tscn" id="6_r4rtn"]
+[ext_resource type="AudioStream" uid="uid://df1l8jqoflxtn" path="res://assets/sounds/Whispers Instrumental.mp3" id="8_x8r46"]
+
+[node name="main" type="Node2D"]
+
+[node name="player" parent="." instance=ExtResource("1_g6b56")]
+position = Vector2(0, -22)
+
+[node name="tilemap" parent="." instance=ExtResource("2_pfhq2")]
+
+[node name="void" parent="tilemap" instance=ExtResource("3_k6gbe")]
+position = Vector2(0, 324)
+
+[node name="small_spike" parent="tilemap" instance=ExtResource("5_gskgp")]
+position = Vector2(175, 0)
+
+[node name="shard" parent="tilemap" instance=ExtResource("4_euupc")]
+
+[node name="background" parent="." instance=ExtResource("6_r4rtn")]
+
+[node name="Amient_noise" type="AudioStreamPlayer" parent="background"]
+stream = ExtResource("8_x8r46")
+volume_db = -6.0
+autoplay = true
+mix_target = 1
+bus = &"music"

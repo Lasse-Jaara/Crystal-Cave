@@ -1,0 +1,158 @@
+[gd_scene load_steps=9 format=3 uid="uid://b62ft0uk67unn"]
+
+[ext_resource type="Theme" uid="uid://cmox6att1o3fd" path="res://scenes/ui/menu_theme.tres" id="1_sdkuo"]
+[ext_resource type="Script" path="res://scripts/menus/main_menu.gd" id="2_fep36"]
+[ext_resource type="AudioStream" uid="uid://ci7jvibev6t5u" path="res://assets/sounds/click.wav" id="3_qmu3j"]
+[ext_resource type="PackedScene" uid="uid://bohdph3a7o4qj" path="res://scenes/ui/menus/pause_menu.tscn" id="4_qncfj"]
+[ext_resource type="PackedScene" uid="uid://dd8ofntjc8fd" path="res://scenes/ui/menus/score.tscn" id="5_hy3tq"]
+
+[sub_resource type="Animation" id="Animation_pgrd8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.129412, 0.0705882, 0.0705882, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_17ktw"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.833333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.129412, 0.0705882, 0.0705882, 1), Color(0.129412, 0.0705882, 0.0705882, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pggsl"]
+_data = {
+"RESET": SubResource("Animation_pgrd8"),
+"fade_in": SubResource("Animation_17ktw")
+}
+
+[node name="Main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_sdkuo")
+script = ExtResource("2_fep36")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.129412, 0.0901961, 0.0901961, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="label_v_box" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/label_v_box"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 85
+text = "Crystal  Cave"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="buttons_v_box" type="VBoxContainer" parent="MarginContainer/label_v_box"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="Start" type="Button" parent="MarginContainer/label_v_box/buttons_v_box"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../Quit")
+focus_neighbor_bottom = NodePath("../Quit")
+focus_next = NodePath("../Quit")
+focus_previous = NodePath("../Quit")
+theme_override_font_sizes/font_size = 72
+text = "Start"
+
+[node name="Options" type="Button" parent="MarginContainer/label_v_box/buttons_v_box"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../Quit")
+focus_neighbor_bottom = NodePath("../Quit")
+focus_next = NodePath("../Quit")
+focus_previous = NodePath("../Quit")
+theme_override_font_sizes/font_size = 64
+text = "Options
+"
+
+[node name="Quit" type="Button" parent="MarginContainer/label_v_box/buttons_v_box"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../Start")
+focus_neighbor_bottom = NodePath("../Start")
+focus_next = NodePath("../Start")
+focus_previous = NodePath("../Start")
+theme_override_font_sizes/font_size = 64
+text = "Quit"
+
+[node name="click_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qmu3j")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="fade" type="ColorRect" parent="CanvasLayer"]
+visible = false
+offset_left = -107.0
+offset_top = -64.0
+offset_right = -67.0
+offset_bottom = -24.0
+scale = Vector2(53.4766, 30.57)
+color = Color(0.129412, 0.0705882, 0.0705882, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/fade"]
+libraries = {
+"": SubResource("AnimationLibrary_pggsl")
+}
+speed_scale = 0.5
+
+[node name="Timer" type="Timer" parent="CanvasLayer/fade"]
+one_shot = true
+
+[node name="pause" parent="CanvasLayer" instance=ExtResource("4_qncfj")]
+visible = false
+
+[node name="Score" parent="CanvasLayer" instance=ExtResource("5_hy3tq")]
+visible = false
+
+[connection signal="pressed" from="MarginContainer/label_v_box/buttons_v_box/Start" to="." method="when_button_start_pressed"]
+[connection signal="pressed" from="MarginContainer/label_v_box/buttons_v_box/Options" to="." method="when_button_options_pressed"]
+[connection signal="pressed" from="MarginContainer/label_v_box/buttons_v_box/Quit" to="." method="when_button_quit_pressed"]
+[connection signal="animation_finished" from="CanvasLayer/fade/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

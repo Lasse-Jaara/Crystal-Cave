@@ -1,0 +1,147 @@
+[gd_scene load_steps=17 format=3 uid="uid://bxumi47gi75va"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_sa0j7"]
+[ext_resource type="Texture2D" uid="uid://o1dwu3md071v" path="res://assets/enemys/Untitled - 2.png" id="2_gvryc"]
+[ext_resource type="Gradient" uid="uid://bql5pagnb343k" path="res://Colors,guis,others/new_gradient.tres" id="2_shr5s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cmh5a"]
+size = Vector2(15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ggh7s"]
+atlas = ExtResource("2_gvryc")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrj5u"]
+atlas = ExtResource("2_gvryc")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lmqj"]
+atlas = ExtResource("2_gvryc")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0uimg"]
+atlas = ExtResource("2_gvryc")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npiit"]
+atlas = ExtResource("2_gvryc")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhpce"]
+atlas = ExtResource("2_gvryc")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ruf1e"]
+atlas = ExtResource("2_gvryc")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1wrr3"]
+atlas = ExtResource("2_gvryc")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qdab"]
+atlas = ExtResource("2_gvryc")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mihc1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ggh7s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mrj5u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lmqj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0uimg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npiit")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhpce")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ruf1e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1wrr3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qdab")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_on3qq"]
+script/source = "extends Area2D
+
+func attack():
+	print(\"pelaaja hyökkää\")
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_texri"]
+radius = 8.0
+
+[node name="roller" type="Node2D" groups=["enemies"]]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 16
+script = ExtResource("1_sa0j7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, 1)
+scale = Vector2(1.04, 1)
+shape = SubResource("RectangleShape2D_cmh5a")
+
+[node name="juoksu" type="CPUParticles2D" parent="CharacterBody2D"]
+position = Vector2(-4, 2)
+amount = 5
+lifetime = 0.6
+speed_scale = 1.2
+lifetime_randomness = 0.15
+emission_shape = 3
+emission_rect_extents = Vector2(5, 4)
+direction = Vector2(-50, 0)
+spread = 12.65
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+scale_amount_min = 1.5
+scale_amount_max = 1.5
+color_ramp = ExtResource("2_shr5s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_mihc1")
+animation = &"run"
+autoplay = "run"
+frame_progress = 0.977673
+
+[node name="RayCast2D_oikea" type="RayCast2D" parent="CharacterBody2D"]
+target_position = Vector2(12, 0)
+
+[node name="RayCast2D_vasen" type="RayCast2D" parent="CharacterBody2D"]
+position = Vector2(3, 0)
+target_position = Vector2(-15, 0)
+
+[node name="RayCast2D_alas" type="RayCast2D" parent="CharacterBody2D"]
+position = Vector2(0, 4)
+target_position = Vector2(0, 6)
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 2
+script = SubResource("GDScript_on3qq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+shape = SubResource("CircleShape2D_texri")
+debug_color = Color(0.9864, 0, 0.323992, 0.42)
+
+[connection signal="area_entered" from="CharacterBody2D/Area2D" to="CharacterBody2D" method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="CharacterBody2D/Area2D" to="CharacterBody2D" method="_on_area_2d_body_entered"]

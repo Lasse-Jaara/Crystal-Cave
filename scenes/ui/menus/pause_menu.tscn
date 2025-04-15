@@ -1,0 +1,88 @@
+[gd_scene load_steps=4 format=3 uid="uid://bohdph3a7o4qj"]
+
+[ext_resource type="Script" path="res://scripts/menus/pause_menu.gd" id="1_8ekrx"]
+[ext_resource type="Theme" uid="uid://cmox6att1o3fd" path="res://scenes/ui/menu_theme.tres" id="1_cqhni"]
+[ext_resource type="AudioStream" uid="uid://ci7jvibev6t5u" path="res://assets/sounds/click.wav" id="3_u11ke"]
+
+[node name="pause" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8ekrx")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 350
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 350
+theme_override_constants/margin_bottom = 124
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer2"]
+layout_mode = 2
+color = Color(0.129412, 0.0901961, 0.0901961, 0.980392)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_cqhni")
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="label_v_box" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/label_v_box"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 85
+text = "--- Paused ---"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="buttons_v_box" type="VBoxContainer" parent="MarginContainer/label_v_box"]
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="Continue" type="Button" parent="MarginContainer/label_v_box/buttons_v_box"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../Exit")
+focus_neighbor_bottom = NodePath("../Exit")
+focus_next = NodePath("../Exit")
+focus_previous = NodePath("../Exit")
+theme_override_font_sizes/font_size = 72
+text = "Continue
+"
+
+[node name="Exit" type="Button" parent="MarginContainer/label_v_box/buttons_v_box"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../Continue")
+focus_neighbor_bottom = NodePath("../Continue")
+focus_next = NodePath("../Continue")
+focus_previous = NodePath("../Continue")
+theme_override_font_sizes/font_size = 64
+text = "Exit the level"
+
+[node name="click_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_u11ke")
+
+[connection signal="pressed" from="MarginContainer/label_v_box/buttons_v_box/Continue" to="." method="when_button_continue_pressed"]
+[connection signal="pressed" from="MarginContainer/label_v_box/buttons_v_box/Exit" to="." method="when_button_exit_pressed"]

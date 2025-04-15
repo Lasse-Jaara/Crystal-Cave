@@ -1,0 +1,110 @@
+[gd_scene load_steps=14 format=3 uid="uid://eq6nwgm7lq61"]
+
+[ext_resource type="Script" path="res://scripts/crystal.gd" id="1_l6jgt"]
+[ext_resource type="Texture2D" uid="uid://bvjn1mq84ceq7" path="res://assets/tiles/crystal2.png" id="1_mvusd"]
+[ext_resource type="AudioStream" uid="uid://muefainv7mci" path="res://assets/sounds/pickup_crystal.wav" id="3_pbcpc"]
+[ext_resource type="Gradient" uid="uid://87s8pdfdixki" path="res://Colors,guis,others/blue.tres" id="3_qtmil"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qab0g"]
+atlas = ExtResource("1_mvusd")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymkft"]
+atlas = ExtResource("1_mvusd")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_arpyx"]
+atlas = ExtResource("1_mvusd")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rern"]
+atlas = ExtResource("1_mvusd")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fsddl"]
+atlas = ExtResource("1_mvusd")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8ll0"]
+atlas = ExtResource("1_mvusd")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q536g"]
+atlas = ExtResource("1_mvusd")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vxial"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qab0g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymkft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_arpyx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rern")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fsddl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8ll0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q536g")
+}],
+"loop": true,
+"name": &"elo",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_odndt"]
+size = Vector2(13.6667, 16.75)
+
+[node name="crystal" type="Node2D"]
+script = ExtResource("1_l6jgt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.1, -1)
+scale = Vector2(1.19375, 1.2)
+sprite_frames = SubResource("SpriteFrames_vxial")
+animation = &"elo"
+autoplay = "elo"
+frame_progress = 0.527558
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(1.2, 1.2)
+shape = SubResource("RectangleShape2D_odndt")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 5
+lifetime = 2.0
+one_shot = true
+speed_scale = 1.25
+explosiveness = 1.0
+randomness = 0.5
+lifetime_randomness = 0.37
+emission_shape = 1
+emission_sphere_radius = 5.0
+direction = Vector2(0, -200)
+spread = 12.65
+gravity = Vector2(0, 90)
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+scale_amount_min = 0.5
+scale_amount_max = 2.0
+color_ramp = ExtResource("3_qtmil")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_pbcpc")
+
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
+[connection signal="finished" from="CPUParticles2D" to="." method="_on_cpu_particles_2d_finished"]

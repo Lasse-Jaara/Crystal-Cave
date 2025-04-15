@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8cgmubbqget0"]
+
+[ext_resource type="Script" path="res://scripts/small_spike.gd" id="1_cjc00"]
+[ext_resource type="Texture2D" uid="uid://dq2fob6n5b1dd" path="res://assets/tiles/spike.png" id="1_e6w8t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_181tt"]
+radius = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1un4e"]
+size = Vector2(6.23188, 6.17484)
+
+[node name="small_spike" type="Node2D"]
+script = ExtResource("1_cjc00")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Spike" type="Sprite2D" parent="Area2D"]
+position = Vector2(0, -3)
+texture = ExtResource("1_e6w8t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(2.93004, 12.3193)
+shape = SubResource("CircleShape2D_181tt")
+debug_color = Color(0.980392, 0, 0, 0.419608)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 7.98896)
+rotation = -3.14159
+scale = Vector2(2.06383, 1.292)
+shape = SubResource("RectangleShape2D_1un4e")
+debug_color = Color(0.994174, 0.0697804, 9.62615e-07, 0.42)
+
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

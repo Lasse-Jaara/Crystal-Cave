@@ -1,0 +1,104 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnvqarficropy"]
+
+[ext_resource type="Theme" uid="uid://cmox6att1o3fd" path="res://scenes/ui/menu_theme.tres" id="1_geapo"]
+[ext_resource type="Script" path="res://scripts/menus/options.gd" id="2_17vr1"]
+[ext_resource type="AudioStream" uid="uid://ci7jvibev6t5u" path="res://assets/sounds/click.wav" id="3_cqcty"]
+
+[node name="options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_geapo")
+script = ExtResource("2_17vr1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.129412, 0.0901961, 0.0901961, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = -48
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+theme = ExtResource("1_geapo")
+theme_override_font_sizes/font_size = 64
+text = "options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 250
+theme_override_constants/margin_right = 150
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+theme = ExtResource("1_geapo")
+theme_override_font_sizes/font_size = 50
+text = "Full screen"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheckButton" type="CheckButton" parent="MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_geapo")
+
+[node name="buttons_v_box" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 148.0
+offset_bottom = 105.0
+size_flags_horizontal = 0
+size_flags_vertical = 2
+
+[node name="exit" type="Button" parent="buttons_v_box"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 72
+text = "Exit
+"
+
+[node name="click_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_cqcty")
+
+[connection signal="toggled" from="MarginContainer/MarginContainer/VBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]
+[connection signal="pressed" from="buttons_v_box/exit" to="." method="when_back_options_button_pressed"]
