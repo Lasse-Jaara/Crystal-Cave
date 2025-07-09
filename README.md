@@ -22,7 +22,6 @@ The purpose/goal of this project is to:
 - Learn and practice using the **Godot** engine
 - Develop better coding habits through experience
 
-## 🚀 How to Run on Visual Studio Code
-
+## 🚀 How to Run
 1. Install .exe from https://jupresson.itch.io/crystal-cave
 2. Doupble click .exe to run the game.
