@@ -2,9 +2,10 @@
 
 **Crystal Cave** is a prototype game developed using the **Godot** engine.
 
-## 🚧 Current Status: Inactive Prototype
+## 🧪 Current Status: Archived
 
-This project is currently in the **prototype stage**, focused on exploring core gameplay mechanics and testing foundational ideas. All features, visuals, and content are subject to significant changes as development progresses.
+This project was built as a learning exercise to explore new tools, techniques, or game mechanics.
+Development is now archived, with no plans for further updates — but it remains available for reference or inspiration.
 
 ## 🛠️ Tech Stack
 
