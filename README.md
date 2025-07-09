@@ -8,8 +8,9 @@ This project is currently in the **prototype stage**, focused on exploring core 
 
 ## 🛠️ Tech Stack
 
-* **Godot Engine**
-* **Pyxel Edit** (for pixel art)
+- **Godot Engine**
+- **GDScript**
+- **Pyxel Edit** (for pixel art)
 
 ## 🎯 Purpose/Goal
 
