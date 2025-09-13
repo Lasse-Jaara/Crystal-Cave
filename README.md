@@ -1,7 +1,7 @@
 # **Crystal Cave**
 
 ## 👀 See game better also on my portfolio
-- https://lasse-jaara.github.io/
+- https://lasse-jaara.github.io/CrystalCaveProject.html
 
 **Crystal Cave** is a prototype game developed using the **Godot** engine.
 
